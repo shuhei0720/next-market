@@ -8,8 +8,8 @@ const RootLayout = ({ children }) => {
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 };

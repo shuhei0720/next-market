@@ -11,6 +11,7 @@ const DeleteItem = (context) => {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const loginUserEmail = useAuth();
   useEffect(() => {
@@ -26,6 +27,7 @@ const DeleteItem = (context) => {
       setImage(singleItem.image);
       setDescription(singleItem.description);
       setEmail(singleItem.email);
+      setLoading(true);
     };
     getSingleItem();
   }, [context]);
@@ -54,27 +56,31 @@ const DeleteItem = (context) => {
       alert("アイテム削除失敗");
     }
   };
-  if (loginUserEmail === email) {
-    return (
-      <div>
-        <h1 className="page-title">アイテム削除</h1>
-        <form onSubmit={handleSubmit}>
-          <h2>{title}</h2>
-          <Image
-            src={image}
-            width={750}
-            height={500}
-            alt="item-image"
-            priority
-          />
-          <h3>￥{price}</h3>
-          <p>{description}</p>
-          <button>削除</button>
-        </form>
-      </div>
-    );
+  if (loading) {
+    if (loginUserEmail === email) {
+      return (
+        <div>
+          <h1 className="page-title">アイテム削除</h1>
+          <form onSubmit={handleSubmit}>
+            <h2>{title}</h2>
+            <Image
+              src={image}
+              width={750}
+              height={500}
+              alt="item-image"
+              priority
+            />
+            <h3>￥{price}</h3>
+            <p>{description}</p>
+            <button>削除</button>
+          </form>
+        </div>
+      );
+    } else {
+      return <h1>権限がありません</h1>;
+    }
   } else {
-    return <h1>権限がありません</h1>;
+    return <h1>ローディング中...</h1>;
   }
 };
 
