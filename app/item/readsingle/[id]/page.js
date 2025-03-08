@@ -13,7 +13,7 @@ const ReadSingleItem = async (context) => {
   const params = await context.params;
   const singleItem = await getSingleItem(params.id);
   return (
-    <div>
+    <div className="grid-container-si">
       <div>
         <Image
           src={singleItem.image}
