@@ -17,7 +17,7 @@ const DeleteItem = (context) => {
     const getSingleItem = async () => {
       const params = await context.params;
       const response = await fetch(
-        `http://localhost:3001/api/item/readsingle/${params.id}`
+        `${process.env.NEXT_PUBLIC_URL}/api/item/readsingle/${params.id}`
       );
       const jsonData = await response.json();
       const singleItem = jsonData.singleItem;
@@ -34,7 +34,7 @@ const DeleteItem = (context) => {
     const params = await context.params;
     try {
       const response = await fetch(
-        `http://localhost:3001/api/item/delete/${params.id}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/item/delete/${params.id}`,
         {
           method: "DELETE",
           headers: {
@@ -67,7 +67,7 @@ const DeleteItem = (context) => {
             alt="item-image"
             priority
           />
-          <h3>\{price}</h3>
+          <h3>￥{price}</h3>
           <p>{description}</p>
           <button>削除</button>
         </form>

@@ -14,21 +14,24 @@ const CreateItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/api/item/create", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          title: title,
-          price: price,
-          image: image,
-          description: description,
-          email: loginUserEmail,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/item/create`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            title: title,
+            price: price,
+            image: image,
+            description: description,
+            email: loginUserEmail,
+          }),
+        }
+      );
       const jsonData = await response.json();
       alert(jsonData.message);
       router.push("/");

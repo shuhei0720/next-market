@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const getSingleItem = async (id) => {
   const response = await fetch(
-    `http://localhost:3001/api/item/readsingle/${id}`
+    `${process.env.NEXT_PUBLIC_URL}/api/item/readsingle/${id}`
   );
   const jsonData = await response.json();
   const singleItem = jsonData.singleItem;
@@ -25,7 +25,7 @@ const ReadSingleItem = async (context) => {
       </div>
       <div>
         <h1>{singleItem.title}</h1>
-        <h2>\{singleItem.price}</h2>
+        <h2>￥{singleItem.price}</h2>
         <hr />
         <p>{singleItem.description}</p>
         <div>
