@@ -43,6 +43,8 @@ const CreateItem = () => {
   if (loginUserEmail) {
     return (
       <div>
+        <title>作成ページ</title>
+        <meta name="description" content="作成ページです" />
         <h1 className="page-title">アイテム作成</h1>
         <ImgInput setImage={setImage} />
         <form onSubmit={handleSubmit}>

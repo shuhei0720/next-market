@@ -32,6 +32,8 @@ const Register = () => {
   };
   return (
     <div>
+      <title>登録ページ</title>
+      <meta name="description" content="登録ページです" />
       <h1 className="page-title">ユーザー登録</h1>
       <form onSubmit={handleSubmit}>
         <input
