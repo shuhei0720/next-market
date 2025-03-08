@@ -1,5 +1,6 @@
 "use client";
 
+import useAuth from "@/app/utils/useAuth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ const DeleteItem = (context) => {
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const loginUserEmail = useAuth();
   useEffect(() => {
     const getSingleItem = async () => {
       const params = await context.params;
@@ -41,7 +43,7 @@ const DeleteItem = (context) => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify({
-            email: "dummy@gmail.com",
+            email: loginUserEmail,
           }),
         }
       );
@@ -52,18 +54,28 @@ const DeleteItem = (context) => {
       alert("アイテム削除失敗");
     }
   };
-  return (
-    <div>
-      <h1>アイテム削除</h1>
-      <form onSubmit={handleSubmit}>
-        <h2>{title}</h2>
-        <Image src={image} width={750} height={500} alt="item-image" priority />
-        <h3>\{price}</h3>
-        <p>{description}</p>
-        <button>削除</button>
-      </form>
-    </div>
-  );
+  if (loginUserEmail === email) {
+    return (
+      <div>
+        <h1>アイテム削除</h1>
+        <form onSubmit={handleSubmit}>
+          <h2>{title}</h2>
+          <Image
+            src={image}
+            width={750}
+            height={500}
+            alt="item-image"
+            priority
+          />
+          <h3>\{price}</h3>
+          <p>{description}</p>
+          <button>削除</button>
+        </form>
+      </div>
+    );
+  } else {
+    return <h1>権限がありません</h1>;
+  }
 };
 
 export default DeleteItem;
